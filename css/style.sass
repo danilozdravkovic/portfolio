@@ -1,0 +1,582 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap')
+@import url('https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap');
+*
+    padding: 0px
+    margin: 0px
+    box-sizing: border-box
+    font-family: 'Lato', sans-serif
+html
+    scroll-behavior: smooth
+.cleaner
+    clear: both
+a
+    text-decoration: none
+ul
+    list-style-type: none
+
+$blue: #404de6
+$purple: #6f42c1
+$white: #fff
+$black: #000
+$gray: #626881
+$transparent: #c04de200
+@mixin flexRow
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    flex-wrap: wrap
+@mixin flexWrap
+    display: flex
+    justify-content: space-around
+    flex-wrap: wrap
+@mixin flexColumn
+    display: flex
+    flex-direction: column
+    flex-wrap: wrap
+/*Obzirom da nisam imao drugu ideju za dodavanje funkcija i uslova u ovom kodu,odlucio sam da uradim
+    sledece.Napravio sam funkciju u kojoj je if koji proverava gde se nalazi p tag i u odnosu na to
+    mu zadaje svojstvo color.Promenljivu sam menjao staticki pre svakog p taga u zavisnosti od toga
+        gde se nalazi.*/
+@function colorOfPTag($position)
+            @if $position == HeaderOrFooter
+                @return $white
+            @else if $position == Main
+                @return $black
+            @else if $position ==Paragraph
+                @return $gray
+main
+    width: 100%
+.bgcolor
+    padding: 1em
+    width: 100%
+    height: 100vh
+    background-image: linear-gradient(120deg,$purple,$blue)
+header
+    width: 70%
+    margin: 0px auto
+    ul
+        @include flexRow
+        li
+            display: block
+            a
+                color: $white
+                font-size: 1em
+                text-transform: uppercase
+.logo
+    text-align: center
+    img
+        width: 60%
+//promena promenljive u zavisnosti pozicije p taga
+$positionOfPTag: HeaderOrFooter    
+#home
+    width: 100%
+    margin-top: 1.5em
+    #caption
+        width: 50%
+        margin: 0px auto
+        h1
+            font-size: 6.6em
+            color: $white
+        p
+            font-size: 1.9em
+            color: colorOfPTag($positionOfPTag)
+#picture
+    width: 18%
+    margin: 2em auto
+    img
+        width: 100%
+        height: 100%
+//BLOK SERVICES
+#services
+    width: 70%
+    text-align: center
+    margin: 8em auto
+
+#servicesRow
+    margin-top: 4em
+    width: 100%
+    @include flexWrap
+.service
+    width: 30%
+    margin-bottom: 3em
+.h2Caption
+    font-size: 3.5em
+.faIcon
+    width: 100px
+    height: 100px
+    margin: 0px auto
+    border-radius: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+.fas,.fab
+    font-size: 4em
+    color: $white
+//za petlju sam dobio ideju da svakom bloku dodelim drugu klasu za boju i uz pomoc petlje napravim te klase
+@each $no,$color in (1, #03b6fc),(2, #6703fc),(3, #fc6072),(4, #e078fa),(5, #fca258),(6, #70ff7a)
+    .color-#{$no}
+        background-color: $color
+.h3Caption
+    margin: 1em
+    font-size: 1.7em
+$positionOfPTag: Paragraph
+.serviceDesc
+    text-align: justify
+    p
+        color: colorOfPTag($positionOfPTag)
+        font-size: 1.1em
+//BLOK SKILLS
+#skills
+    @extend #services
+    margin: 0px auto
+#skillsBlock
+    width: 100%
+    @include flexWrap
+.skillsRow
+    margin: 4em 0em
+    width: 18%
+    @include flexWrap
+    align-items: center
+.skill
+    width: 100%
+    margin-top: 1.5em
+    transition: transform 1000ms
+    img
+        width: 100%
+        border-radius: 15%
+        height: 100%
+.skill:hover
+    transform: rotateY(180deg)
+//BLOK PROJECTS
+#projects
+    @extend #services
+#projectsColumn
+    width: 100%
+    @include flexColumn
+    .project
+        width: 100%
+        margin-top: 7em
+        background-color: #f2f2f2
+        border-radius: 1em
+.leftProject
+    float: left
+    height: 65vh
+    width: 50%
+    p
+        color: $gray
+        font-size: 1em
+        font-style: italic
+.rightProject
+    @extend .leftProject
+    float: right
+.dispFlex
+    @include flexColumn
+.h4Caption
+    width: 50%
+    font-size: 3em
+    font-weight: bold
+    text-align: left
+    margin: 1.5em 0em 0em 1.5em
+.colorProject2
+    background-image: linear-gradient(150deg,#c99fff -20%,#4a4eff)
+.colorProject3
+    background-image: linear-gradient(225deg,#0abac2,#b2de94)
+.project1Picture
+    width: 100%
+    height: 100%
+    border-radius: 0em 1em 1em 0em
+.viewProject
+    width: 40%
+    padding: 1em
+    border-radius: 3em
+    margin: 4em 0em 0em 4.5em
+    p
+        color: $white
+        text-transform: uppercase
+        font-size: 0.7em
+        font-weight: bold
+.pTagProject
+    width: 50%
+    margin-left: 3em
+@each $no,$gradient in (1, linear-gradient(135deg,#e67300 -20%,#4d2600 120%)),(2, linear-gradient(135deg,#72e9f3 -20%,#404de6 120%)),(3, linear-gradient(225deg,#1ad4bb,#b2de94))
+    .viewColor-#{$no}
+        background-image: $gradient
+.colorProject2,.colorProject3
+        display: flex
+        justify-content: center
+        align-items: center
+        img
+            display: block
+            width: 50%
+.colorProject2
+    border-radius: 1em 0em 0em 1em
+.colorProject3
+    border-radius: 0em 1em 1em 0em
+//BLOK ABOUTME
+$positionOfPTag: Paragraph
+#aboutMe
+    width: 100%
+    text-align: center
+    #aboutMeWrapper
+        width: 100%
+        @include flexRow
+        margin-top: 4em
+        .aboutMeBlock
+            width: 30%
+            img
+                width: 100%
+        .border
+            border: 12px double $black
+        .dispFlexCol
+            @include flexColumn
+            justify-content: space-around
+            div
+                span,i
+                    float: left
+                span
+                    color: $gray
+                    margin-left: 1em
+        p
+            color: colorOfPTag($positionOfPTag)
+            text-align: justify
+            font-size: 1.7em
+            margin-top: 3em
+.fa-aboutMe
+    color: $gray
+    font-size: 1.2em
+//BLOCK CONTACT
+#contact
+    width: 100%
+    background-image: linear-gradient(to bottom right,#c04de2,#340c7f)
+    text-align: center
+    margin-top: 3em
+    padding-top: 3em
+    form
+        margin:
+    .input
+        width: 30%
+        height: 10vh
+        background-color: $transparent
+        border-left: none
+        border-top: none
+        border-right: none
+        border-bottom: 1px solid $white
+        margin: 3em 1em 3em 1em
+        padding: 1em
+    #message
+        width: 63%
+        height: 25vh
+        background-color: $transparent
+        border-left: none
+        border-top: none
+        border-right: none
+        border-bottom: 1px solid $white
+        padding: 1em
+    #button
+        width: 5%
+        height: 5vh
+        margin: 3em 0em 3em 0em
+        font-size: 1em
+        text-transform: uppercase
+        background-color: $black
+        color: $white
+        border: none 
+.whiteCaption
+    color: $white    
+.input::placeholder,#message::placeholder,#button
+    color: $white
+    font-size: 2.5em
+    font-family: 'Odibee Sans'
+#message:hover,.input:hover
+    border: 1px solid $white !important
+//FOOTER
+$positionOfPTag: HeaderOrFooter
+footer
+    background-color: $black
+    ul
+        @include flexRow
+        li
+            display: block
+    p
+        color: colorOfPTag($positionOfPTag)
+        margin: 2em 0em 1em 0em
+        font-size: 1.5em
+.fa-footer
+    color: $white
+    font-size: 2.5em
+    margin: 1em 0em 1em 0em
+//RESPONSIVE
+@media screen and (max-width:1340px)
+    .h3Caption
+        font-size: 1.5em
+    #aboutMe
+        #aboutMeWrapper
+            p
+                font-size: 1.5em
+@media screen and (max-width:1185px)
+    .faIcon
+        width: 80px
+        height: 80px
+    .fas,.fab
+        font-size: 3em
+    .h3Caption
+        font-size: 1.3em
+    .serviceDesc
+        p
+            font-size: 1em
+    .fa-aboutMe
+        font-size: 1.2em
+    footer
+        p
+            font-size: 1.2em 
+    .fa-footer
+        font-size: 2em
+    #aboutMe
+        #aboutMeWrapper
+            p
+                font-size: 1.4em
+@media screen and (max-width:1165px)
+    .h4Caption
+        font-size: 2.5em
+    .pTagProject
+        font-size: 0.8em !important
+    #aboutMe
+        #aboutMeWrapper
+            p
+                font-size: 1.3em
+@media screen and (max-width:1030px)
+    #home
+        #caption
+            h1
+                font-size: 6em
+            p
+                font-size: 1.5em
+    .faIcon
+        width: 60px
+        height: 60px
+    .fas,.fab
+        font-size: 2em
+    .h3Caption
+        font-size: 1em
+    .serviceDesc
+        p
+            font-size: 0.8em
+    .h2Caption
+        font-size: 3em
+    .fa-aboutMe
+        font-size: 1.2em
+    footer
+        p
+            font-size: 1em 
+    .fa-footer
+        font-size: 1.6em
+    #projectsColumn
+        .project
+    #aboutMe
+        #aboutMeWrapper
+            p
+                font-size: 1.1em
+    span
+        font-size: 0.8em
+    #picture
+        width: 25%
+    .h4Caption
+        font-size: 2.2em
+    .pTagProject
+        font-size: 0.7em !important
+    .viewProject
+        width: 35%
+        p
+            font-size: 0.5em
+@media screen and (max-width:865px)
+    header
+        width: 100%
+    #home
+        #caption
+            p
+                font-size: 1.2em
+    #picture
+        width: 30%
+    .h3Caption
+        font-size: 0.9em
+    #skills
+        width: 90%
+    .rightProject,.leftProject
+        width: 100%
+        height: 40vh
+    .reverse
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap-reverse
+    .colorProject2,.colorProject3,.project1Picture
+        border-radius: 1em 1em 0em 0em
+    .colorProject2,.colorProject3
+        img
+            width: 30%
+    .h4Caption
+        font-size: 2em
+        margin: 0.5em auto 0em auto
+        text-align: center
+    .pTagProject
+        margin: 1em auto 0em auto
+        font-size: 1em !important
+    .viewProject
+        margin: 2em auto 0em auto
+        width: 30%
+        p
+            font-size: 0.7em
+    #aboutMe
+        #aboutMeWrapper
+            .aboutMeBlock
+                width: 40%
+            .responsiveWidth
+                width: 90%
+    .input::placeholder,#message::placeholder
+        font-size: 2em
+    #contact
+        #button
+            width: 10%
+    footer
+        p
+            font-size: 0.8em 
+    .fa-footer
+        font-size: 1.3em
+@media screen and (max-width:720px)
+    .service
+        width: 45%
+@media screen and (max-width:580px)
+    header
+        ul
+            li
+                a
+                    font-size: 0.7em
+    .logo
+        img
+            width: 45%
+    #home
+        #caption
+            width: 70%
+            h1
+                font-size: 4em
+            p
+                font-size: 1.2em
+    #picture
+        width: 40%
+        margin-top: 5em
+    #services,#projects
+        margin: 5em auto
+    #aboutMe
+        #aboutMeWrapper
+            p
+                font-size: 0.8em
+    span
+        font-size: 0.7em
+    .fa-aboutMe
+        font-size: 1em
+@media screen and (max-width:510px)
+    .h3Caption
+        font-size: 0.8em
+    .h4Caption
+        font-size: 1.8em
+    .pTagProject
+        font-size: 0.8em !important
+    .viewProject
+        width: 40%
+        p
+            font-size: 0.6em
+    span
+        font-size: 0.6em
+    .fa-aboutMe
+        font-size: 0.7em
+    #contact
+        #button
+            width: 20%
+@media screen and (max-width:435px)
+    header
+        ul
+            li
+                a
+                    font-size: 0.6em
+    #home
+        #caption
+            width: 90%
+            margin-top: 3em
+            h1
+                font-size: 3.7em
+            p
+                font-size: 1em
+    #picture
+        width: 50%
+    .logo
+        img
+            width: 40%
+    .service
+        width: 100%
+    .skillsRow
+        width: 60%
+        justify-content: space-between
+        margin: 0px auto
+    #skillsBlock
+        padding-top: 3em
+    .colorProject2,.colorProject3
+        img
+            width: 50%
+    #aboutMe
+        #aboutMeWrapper
+            .aboutMeBlock
+                width: 80%
+    span
+        font-size: 0.8em
+    .fa-aboutMe
+        font-size: 1.2em
+    .responsiveInfo
+        margin-top: 1em
+    .input::placeholder,#message::placeholder
+        font-size: 1.6em
+    footer
+        p
+            font-size: 0.6em 
+    .fa-footer
+        font-size: 1em
+    #aboutMe
+        #aboutMeWrapper
+            p
+                font-size: 0.9em
+@media screen and (max-width:410px)
+    header
+        ul
+            li
+                a
+                    font-size: 0.5em
+    .logo
+        img
+            width: 35%
+    .h2Caption
+        font-size: 2.5em
+    .h4Caption
+        font-size: 1.2em
+    .pTagProject
+        font-size: 0.6em !important
+    .viewProject
+        width: 45%
+        p
+            font-size: 0.5em
+    .rightProject,.leftProject
+        height: 30vh
+        
+    
+    
+    
+    
+    
+
+
+        
+            
+
+
+
+
+
+
+    
